@@ -1,0 +1,17 @@
+plugins {
+    id 'org.springframework.boot' version '3.2.4'
+    id 'io.spring.dependency-management'
+    id 'java'
+}
+
+group = 'io.analytics.platform.sink'
+version = '0.0.1-SNAPSHOT'
+
+dependencies {
+    implementation project(":common")
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.postgresql:postgresql:42.7.3'
+    implementation 'org.springframework.kafka:spring-kafka'
+    implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client:7.17.17'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}

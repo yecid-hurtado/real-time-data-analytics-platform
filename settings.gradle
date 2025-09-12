@@ -1,0 +1,8 @@
+rootProject.name = "analytics-platform"
+
+include("common")
+include("ingestion-service")
+include("processor-service")
+include("alert-service")
+include("sink-service")
+include("gateway")

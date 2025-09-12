@@ -1,0 +1,17 @@
+{
+    "dashboard": {
+      "id": null,
+      "title": "Analytics Platform Dashboard",
+      "panels": [
+        {
+          "type": "graph",
+          "title": "Events Processed per Second",
+          "targets": [
+            { "expr": "rate(events_processed_total[1m])" }
+          ]
+        }
+      ]
+    },
+    "overwrite": true
+  }
+  
