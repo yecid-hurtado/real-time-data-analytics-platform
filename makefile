@@ -77,3 +77,19 @@ sink:
 gateway:
 	@echo "Running gateway..."
 	./gradlew :gateway:bootRun
+
+# -----------------------------
+# Code quality (Spotless)
+# -----------------------------
+
+lint:
+	@echo "Checking code formatting..."
+	./gradlew spotlessCheck
+
+format:
+	@echo "Auto-formatting code..."
+	./gradlew spotlessApply
+
+build:
+	@echo "Building all modules with tests..."
+	./gradlew clean build
