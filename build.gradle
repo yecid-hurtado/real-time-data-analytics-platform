@@ -4,28 +4,23 @@ plugins {
     id 'com.diffplug.spotless' version '6.25.0'
 }
 
-spotless {
-    java {
-        googleJavaFormat()
-        target 'src/**/*.java'
-    }
-}
-
-group = 'io.analytics.platform'
-version = '0.0.1-SNAPSHOT'
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
-}
-
-repositories {
-    mavenCentral()
-}
-
 subprojects {
     apply plugin: 'java'
+    apply plugin: 'com.diffplug.spotless'
+
+    spotless {
+        java {
+            googleJavaFormat()
+            trimTrailingWhitespace()
+            endWithNewline()
+            target 'src/**/*.java'
+        }
+        format 'misc', {
+            target '**/*.gradle', '**/*.md', '**/.gitignore', '**/*.yml', '**/*.yaml'
+            trimTrailingWhitespace()
+            endWithNewline()
+        }
+    }
 
     repositories {
         mavenCentral()
@@ -37,5 +32,14 @@ subprojects {
 
     tasks.withType(Test) {
         useJUnitPlatform()
+    }
+}
+
+group = 'io.analytics.platform'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }

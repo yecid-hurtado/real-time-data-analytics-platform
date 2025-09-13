@@ -1,12 +1,13 @@
 # Real-Time Data Analytics Platform (Java MVP)
 
 ## 📖 Overview
-This project is a **real-time data analytics platform** built with Java and Spring Boot.  
-It demonstrates senior-level architecture skills by combining **event-driven microservices**, **stream processing**, **alerting**, and **observability** into a complete end-to-end system.
+
+This project is a **real-time data analytics platform** built with Java and Spring Boot.
 
 ---
 
 ## 📂 Documentation
+
 The project documentation is organized into modular sections:
 
 1. [Scope, Assumptions, and Principles](docs/00-scope.md)
@@ -25,25 +26,30 @@ The project documentation is organized into modular sections:
 ---
 
 ## 🚀 Quick Start
+
 1. Clone this repository
-```bash
-git clone https://github.com/your-username/real-time-data-analytics-platform.git
-cd real-time-data-analytics-platform
-```
+
+   ```bash
+   git clone https://github.com/your-username/real-time-data-analytics-platform.git
+   cd real-time-data-analytics-platform
+   ```
 
 2. Start infrastructure with Docker Compose
-```bash
-docker-compose up -d
-```
+
+   ```bash
+   docker-compose up -d
+   ```
 
 3. Build and run services
-```bash
-./gradlew bootRun
-```
+
+   ```bash
+   ./gradlew bootRun
+   ```
 
 ---
 
 ## 🛠 Tech Stack
+
 - **Java 21 + Spring Boot**
 - **Kafka** for messaging
 - **PostgreSQL** for structured storage

@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: ${SERVICE_NAME:common-library}
+
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:default}
+
+# ================================
+# Service metadata
+# ================================
+service:
+  name: ${SERVICE_NAME:common-library}
+  version: ${SERVICE_VERSION:0.0.1}
+
+# ================================
+# Logging configuration
+# ================================
+logging:
+  level:
+    root: INFO
+    org.springframework: INFO
+  format: ${LOG_FORMAT:text}

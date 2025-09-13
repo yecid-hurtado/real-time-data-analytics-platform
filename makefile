@@ -4,25 +4,25 @@ PROJECT_NAME=analytics-platform
 # Infra management
 # -----------------------------
 
-up:
+up: ## Start infrastructure
 	@echo "Starting infrastructure..."
 	docker compose up -d
 
-down:
+down: ## Stop infrastructure
 	@echo "Stopping infrastructure..."
 	docker compose down
 
-restart: down up
+restart: down up ## Restart infrastructure
 
-logs:
+logs: ## Show container logs
 	@echo "Showing logs (Ctrl+C to exit)..."
 	docker compose logs -f
 
-ps:
+ps: ## List active containers
 	@echo "Active containers:"
 	docker ps --filter "name=$(PROJECT_NAME)" || true
 
-clean:
+clean: ## Remove containers, volumes, and networks
 	@echo "Removing containers, volumes, and networks..."
 	docker compose down -v --remove-orphans
 
@@ -30,11 +30,11 @@ clean:
 # Database helpers
 # -----------------------------
 
-db-shell:
+db-shell: ## Connect to PostgreSQL shell
 	@echo "Connecting to PostgreSQL shell..."
 	docker exec -it postgres psql -U analytics -d analyticsdb
 
-db-tables:
+db-tables: ## List tables in analyticsdb
 	@echo "Listing tables in analyticsdb..."
 	docker exec -it postgres psql -U analytics -d analyticsdb -c "\dt"
 
@@ -42,7 +42,7 @@ db-tables:
 # Kafka helpers
 # -----------------------------
 
-kafka-topics:
+kafka-topics: ## List Kafka topics
 	@echo "Listing Kafka topics..."
 	docker exec -it kafka kafka-topics.sh --list --bootstrap-server localhost:9092
 
@@ -50,7 +50,7 @@ kafka-topics:
 # Elasticsearch helpers
 # -----------------------------
 
-es-health:
+es-health: ## Check Elasticsearch health
 	@echo "Checking Elasticsearch health..."
 	curl -s http://localhost:9200/_cluster/health?pretty
 
@@ -58,23 +58,23 @@ es-health:
 # Spring Boot services
 # -----------------------------
 
-ingestion:
+ingestion: ## Run ingestion-service
 	@echo "Running ingestion-service..."
 	./gradlew :ingestion-service:bootRun
 
-processor:
+processor: ## Run processor-service
 	@echo "Running processor-service..."
 	./gradlew :processor-service:bootRun
 
-alert:
+alert: ## Run alert-service
 	@echo "Running alert-service..."
 	./gradlew :alert-service:bootRun
 
-sink:
+sink: ## Run sink-service
 	@echo "Running sink-service..."
 	./gradlew :sink-service:bootRun
 
-gateway:
+gateway: ## Run gateway
 	@echo "Running gateway..."
 	./gradlew :gateway:bootRun
 
@@ -82,14 +82,35 @@ gateway:
 # Code quality (Spotless)
 # -----------------------------
 
-lint:
+lint: ## Check code formatting
 	@echo "Checking code formatting..."
 	./gradlew spotlessCheck
 
-format:
+format: ## Auto-format code
 	@echo "Auto-formatting code..."
 	./gradlew spotlessApply
 
-build:
+build: ## Build all modules with tests
 	@echo "Building all modules with tests..."
 	./gradlew clean build
+
+# -----------------------------
+# Tests
+# -----------------------------
+
+test-common: ## Run unit tests only for the common module
+	@echo "Running unit tests for common module..."
+	./gradlew clean :common:test
+
+test-all: ## Run all tests across all modules
+	@echo "Running all tests..."
+	./gradlew clean test
+
+# -----------------------------
+# Help
+# -----------------------------
+
+help: ## List all available make commands
+	@echo "Available commands:"
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
+		| awk 'BEGIN {FS = ":.*?## "}; {printf "  %-20s %s\n", $$1, $$2}'
