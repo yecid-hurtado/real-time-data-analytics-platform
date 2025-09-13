@@ -2,7 +2,7 @@
 
 ## 📖 Overview
 
-This project is a **real-time data analytics platform** built with Java and Spring Boot.
+This project is a **real-time data analytics platform** built with Java and Spring Boot. It provides an end-to-end pipeline to ingest, process, and analyze streaming events, trigger alerts based on rules, and persist enriched data into PostgreSQL and Elasticsearch, while exposing APIs through a gateway and ensuring full observability with Prometheus and Grafana.
 
 ---
 
